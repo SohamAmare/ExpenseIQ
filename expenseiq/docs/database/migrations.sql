@@ -1,0 +1,37 @@
+-- DOCUMENTATION-ONLY MIGRATION LEDGER - NEWEST ENTRY FIRST
+-- Documentation state: Shared Next.js baseline
+-- Base-project marker: unmodified Next.js/shadcn starter; replace this state
+-- with Project-specific when real migrations or persistence behavior exist.
+-- Ledger initialized: 2026-06-23 15:46 +05:30
+--
+-- NEVER EXECUTE THIS FILE AS ONE SQL BATCH.
+-- Entries are reverse chronological for AI/human retrieval, while executable
+-- migrations must run through the project's migration tool in its required order.
+-- The real migration files and database migration table remain operational truth.
+--
+-- === BEGIN MIGRATION ENTRIES (NEWEST FIRST) ===
+-- No verified or proposed migrations are recorded in the shared baseline.
+-- === END MIGRATION ENTRIES ===
+--
+-- PREPEND EACH NEW ENTRY IMMEDIATELY AFTER THE BEGIN MARKER USING THIS FORMAT:
+-- =============================================================================
+-- Migration ID: YYYYMMDDHHmm_<specific_slug>
+-- Timestamp: YYYY-MM-DD HH:mm +/-HH:MM
+-- Status: Proposed | Implemented - awaiting verification | Verified | Reverted
+-- Owning plan: docs/plans/plan<N>.md | None
+-- Source migration: <repository-relative executable migration path> | None
+-- Purpose: <why the migration exists>
+-- Enables/fixes: <feature, invariant, defect, or operational requirement>
+-- Dependencies/order: <required predecessor IDs or None>
+-- Data/backfill impact: <exact rows/data transformation or None>
+-- Locking/downtime risk: <exact risk and mitigation>
+-- Compatibility/rollback: <forward/backward compatibility and recovery procedure>
+-- Verification: <pending or exact evidence>
+-- =============================================================================
+-- <exact forward SQL for this migration>
+--
+-- A planning agent may prepend a Proposed entry only after resolving exact DDL,
+-- safety, compatibility, backfill, and rollback decisions. Implementation promotes
+-- its status; explicit user verification promotes it to Verified. If the plan is
+-- abandoned or redesigned, revise/remove its Proposed entry and restore schema.sql
+-- to the last verified complete snapshot.

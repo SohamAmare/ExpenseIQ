@@ -1,5 +1,4 @@
-<!-- @AGENTS.md -->
-# Claude workflow entry point
+# Agent workflow entry point
 
 Infer the workflow from user intent; never require the user to name internal guides, documentation files, checkpoints, verification commands, or Git operations.
 

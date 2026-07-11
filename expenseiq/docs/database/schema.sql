@@ -1,0 +1,34 @@
+-- DOCUMENTATION-ONLY SCHEMA MIRROR
+-- Documentation state: Shared Next.js baseline
+-- Base-project marker: unmodified Next.js/shadcn starter; replace this state
+-- with Project-specific when real schema or persistence behavior exists.
+-- Snapshot status: Verified
+-- Snapshot timestamp: 2026-06-23 15:46 +05:30
+-- Owning active plan: None
+-- Executable schema source: None detected
+--
+-- Purpose:
+--   This file contains the complete verified SQL schema, or the complete proposed
+--   post-change schema while exactly one active data-changing plan owns it.
+--
+-- Safety:
+--   Do not execute this file automatically. The application's executable schema,
+--   migration tooling, and provider-specific source remain authoritative for
+--   application/deployment behavior. Reconcile differences before implementation.
+--
+-- Status rules:
+--   Verified  = matches implemented, user-verified source.
+--   Proposed  = complete target schema designed by the named active plan; not shipped.
+--   Implemented - awaiting verification = source changed, but user verification is pending.
+--
+-- Current complete schema:
+--   No verified database objects exist in the shared baseline. There is therefore
+--   no CREATE TABLE, constraint, index, view, trigger, function, or policy DDL below.
+--
+-- When persistence is introduced, replace the empty-schema statement with the full
+-- provider-compatible DDL. Include every object, column/type/default/nullability,
+-- primary/foreign/unique/check constraint, index, view, trigger/function, and policy.
+-- Keep this as a complete snapshot rather than an incremental diff.
+-- === BEGIN COMPLETE SCHEMA ===
+-- No verified schema objects.
+-- === END COMPLETE SCHEMA ===
