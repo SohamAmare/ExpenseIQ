@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { ThemeClientProvider } from "@/components/theme-client-provider";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -31,10 +31,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeClientProvider>
           {children}
           <Toaster position="top-right" />
-        </ThemeProvider>
+        </ThemeClientProvider>
       </body>
     </html>
   );

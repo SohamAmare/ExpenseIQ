@@ -19,7 +19,7 @@ export function TodaySummary({ data }: TodaySummaryProps) {
       label: "Earned Today",
       value: `₹${data.moneyEarnedToday.toLocaleString()}`,
       icon: ArrowUp,
-      color: "text-emerald-700 bg-emerald-50 border-emerald-100",
+      color: "text-emerald-700 bg-emerald-50 border-emerald-100 dark:text-emerald-400 dark:bg-emerald-950/20 dark:border-emerald-900/30",
     },
     {
       label: "Bills Due Today",
@@ -36,7 +36,7 @@ export function TodaySummary({ data }: TodaySummaryProps) {
   ];
 
   return (
-    <Card className="border border-neutral-border bg-white shadow-2xs">
+    <Card className="border border-neutral-border bg-card shadow-2xs">
       <CardHeader className="pb-3 pt-5">
         <CardTitle className="text-sm font-extrabold text-text-primary flex items-center gap-2">
           <span className="size-2 rounded-full bg-brand-primary animate-pulse" />
@@ -51,7 +51,7 @@ export function TodaySummary({ data }: TodaySummaryProps) {
               key={index}
               className={`p-3.5 rounded-xl border flex items-center gap-3.5 ${item.color} hover:scale-[1.01] transition-all duration-200`}
             >
-              <div className="flex items-center justify-center size-8 rounded-lg bg-white/70 border border-neutral-border/10 shrink-0 shadow-3xs">
+              <div className="flex items-center justify-center size-8 rounded-lg bg-card/70 border border-neutral-border/10 shrink-0 shadow-3xs">
                 <Icon className="size-4" />
               </div>
               <div className="space-y-0.5 min-w-0">

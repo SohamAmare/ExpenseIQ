@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import { AuthBranding } from "./auth-branding";
 import { AuthLogo } from "./auth-logo";
 
@@ -7,6 +9,22 @@ interface AuthLayoutProps {
 }
 
 export function AuthLayout({ children }: AuthLayoutProps) {
+  useEffect(() => {
+    // Unconditionally force light mode on documentElement for authentication pages
+    const html = document.documentElement;
+    html.classList.remove("dark");
+    html.style.colorScheme = "light";
+
+    return () => {
+      // Restore user's saved preference when unmounting
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        html.classList.add("dark");
+        html.style.colorScheme = "dark";
+      }
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full bg-neutral-bg overflow-x-hidden">
       {/* Left-side branding view (visible only on large layouts) */}

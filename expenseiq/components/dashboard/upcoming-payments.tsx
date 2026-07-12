@@ -9,7 +9,7 @@ interface UpcomingPaymentsProps {
 
 export function UpcomingPayments({ data }: UpcomingPaymentsProps) {
   return (
-    <Card className="border border-neutral-border bg-white shadow-2xs h-full flex flex-col justify-between">
+    <Card className="border border-neutral-border bg-card shadow-2xs h-full flex flex-col justify-between">
       <CardHeader className="pb-3 pt-5">
         <CardTitle className="text-xs font-bold text-text-secondary tracking-wider uppercase flex items-center justify-between">
           <span>Upcoming Payments</span>

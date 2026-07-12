@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/auth/client";
-import { syncSessionAction, clearSessionAction } from "@/lib/auth/actions";
+import { syncSessionAction, clearSessionAction, getServerSessionAction } from "@/lib/auth/actions";
 import { AUTH_ROUTES } from "@/constants/auth";
 
 export function useAuth() {
@@ -12,18 +12,47 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetches initial active session from Supabase Client SDK
+    // Fetches initial active session from Supabase Client SDK or Server-Assisted Sync
     const getInitialSession = async () => {
       try {
+        // 1. Check browser session
         const { data: { session: initialSession } } = await supabase.auth.getSession();
-        setSession(initialSession);
-        setUser(initialSession?.user ?? null);
         
         if (initialSession) {
+          setSession(initialSession);
+          setUser(initialSession.user);
+          // Sync with server cookies
           await syncSessionAction(initialSession.access_token, initialSession.refresh_token);
-        } else {
-          await clearSessionAction();
+          setLoading(false);
+          return;
         }
+
+        // 2. If browser session is missing, verify whether a valid server-side session exists
+        const serverResult = await getServerSessionAction();
+        if (
+          serverResult.success &&
+          serverResult.session &&
+          serverResult.session.access_token &&
+          serverResult.session.refresh_token
+        ) {
+          // Restore browser client using tokens from cookies
+          const { data: { session: restoredSession }, error } = await supabase.auth.setSession({
+            access_token: serverResult.session.access_token,
+            refresh_token: serverResult.session.refresh_token,
+          });
+
+          if (!error && restoredSession) {
+            setSession(restoredSession);
+            setUser(restoredSession.user);
+            setLoading(false);
+            return;
+          }
+        }
+
+        // 3. Only if both report no valid session, clean up
+        setSession(null);
+        setUser(null);
+        await clearSessionAction();
       } catch {
         // Silently capture errors
       } finally {

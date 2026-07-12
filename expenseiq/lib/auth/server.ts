@@ -16,12 +16,24 @@ export async function getServerSupabaseClient() {
 export async function getAuthenticatedUser() {
   const { accessToken, refreshToken } = await getSessionTokens();
   
+  const supabase = await getServerSupabaseClient();
+
   if (!accessToken) {
+    // If access token is missing/expired, attempt to refresh using the refresh token
+    if (refreshToken) {
+      const { data: { session }, error: refreshError } = await supabase.auth.refreshSession({
+        refresh_token: refreshToken,
+      });
+
+      if (!refreshError && session) {
+        // Sync the refreshed access/refresh tokens back to cookies
+        await setSessionCookies(session.access_token, session.refresh_token);
+        return session.user;
+      }
+    }
     return null;
   }
 
-  const supabase = await getServerSupabaseClient();
-  
   // Verify access token with Supabase Auth
   const { data: { user }, error } = await supabase.auth.getUser(accessToken);
   
@@ -45,4 +57,52 @@ export async function getAuthenticatedUser() {
   }
 
   return user;
+}
+
+export async function getServerSession() {
+  const { accessToken, refreshToken } = await getSessionTokens();
+  const supabase = await getServerSupabaseClient();
+
+  if (!accessToken) {
+    if (refreshToken) {
+      const { data: { session }, error: refreshError } = await supabase.auth.refreshSession({
+        refresh_token: refreshToken,
+      });
+
+      if (!refreshError && session) {
+        await setSessionCookies(session.access_token, session.refresh_token);
+        return {
+          accessToken: session.access_token,
+          refreshToken: session.refresh_token,
+          user: session.user,
+        };
+      }
+    }
+    return null;
+  }
+
+  // Verify access token with Supabase Auth
+  const { data: { user }, error } = await supabase.auth.getUser(accessToken);
+  
+  if (error || !user) {
+    if (refreshToken) {
+      const { data: { session }, error: refreshError } = await supabase.auth.refreshSession({
+        refresh_token: refreshToken,
+      });
+
+      if (!refreshError && session) {
+        await setSessionCookies(session.access_token, session.refresh_token);
+        return {
+          accessToken: session.access_token,
+          refreshToken: session.refresh_token,
+          user: session.user,
+        };
+      }
+    }
+    
+    await clearSessionCookies();
+    return null;
+  }
+
+  return { accessToken, refreshToken, user };
 }

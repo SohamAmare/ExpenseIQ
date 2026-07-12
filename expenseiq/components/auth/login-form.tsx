@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { loginSchema } from "@/lib/auth/validation";
 import { loginAction } from "@/lib/auth/actions";
+import { supabase } from "@/lib/auth/client";
 import { LoginInput } from "@/types/auth";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./password-input";
@@ -36,6 +37,12 @@ export function LoginForm() {
     try {
       const result = await loginAction(data);
       if (result.success) {
+        if (result.session) {
+          await supabase.auth.setSession({
+            access_token: result.session.access_token,
+            refresh_token: result.session.refresh_token,
+          });
+        }
         toast.success("Successfully logged in!");
         router.push(AUTH_ROUTES.DASHBOARD);
         router.refresh();

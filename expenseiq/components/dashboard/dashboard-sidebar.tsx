@@ -26,7 +26,7 @@ export function DashboardSidebar() {
   };
 
   const navContent = (
-    <div className="flex flex-col h-full bg-white border-r border-neutral-border py-6 px-4">
+    <div className="flex flex-col h-full bg-sidebar-bg border-r border-sidebar-border py-6 px-4">
       {/* Brand Header */}
       <div className="flex items-center gap-3 px-2 mb-8">
         <div className="flex items-center justify-center size-9 rounded-lg bg-brand-primary text-white shadow-xs shrink-0">

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getServerSupabaseClient } from "./server";
+import { getServerSupabaseClient, getServerSession } from "./server";
 import { setSessionCookies, clearSessionCookies } from "./session";
 import { loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from "./validation";
 import { getFriendlyErrorMessage } from "./error-handler";
@@ -30,6 +30,13 @@ export async function loginAction(formData: unknown) {
 
     if (data.session) {
       await setSessionCookies(data.session.access_token, data.session.refresh_token);
+      return {
+        success: true,
+        session: {
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+        },
+      };
     }
 
     return { success: true };
@@ -66,7 +73,16 @@ export async function registerAction(formData: unknown) {
     // If session is returned (immediate login enabled on Supabase)
     if (data.session) {
       await setSessionCookies(data.session.access_token, data.session.refresh_token);
-      return { success: true, data: { sessionActive: true } };
+      return {
+        success: true,
+        data: {
+          sessionActive: true,
+          session: {
+            access_token: data.session.access_token,
+            refresh_token: data.session.refresh_token,
+          },
+        },
+      };
     }
 
     return {
@@ -161,4 +177,23 @@ export async function syncSessionAction(accessToken: string, refreshToken: strin
 export async function clearSessionAction() {
   await clearSessionCookies();
   return { success: true };
+}
+
+export async function getServerSessionAction() {
+  try {
+    const session = await getServerSession();
+    if (session) {
+      return {
+        success: true,
+        session: {
+          access_token: session.accessToken,
+          refresh_token: session.refreshToken,
+        },
+        user: session.user,
+      };
+    }
+    return { success: false };
+  } catch {
+    return { success: false };
+  }
 }

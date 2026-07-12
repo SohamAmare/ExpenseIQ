@@ -90,7 +90,7 @@ export default function DashboardPage() {
           </span>
           <button
             onClick={refresh}
-            className="flex items-center justify-center size-8 rounded-lg hover:bg-neutral-secondary-bg text-text-secondary hover:text-text-primary border border-neutral-border/50 bg-white transition-colors duration-200"
+            className="flex items-center justify-center size-8 rounded-lg hover:bg-neutral-secondary-bg text-text-secondary hover:text-text-primary border border-neutral-border/50 bg-card transition-colors duration-200"
             aria-label="Refresh telemetry"
           >
             <RefreshCw className="size-3.5" />
@@ -138,7 +138,7 @@ export default function DashboardPage() {
         {/* Left Side: Analytics Charts (2/3 width) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Spending Trend Area */}
-          <Card className="border border-neutral-border bg-white shadow-2xs">
+          <Card className="border border-neutral-border bg-card shadow-2xs">
             <CardHeader className="pb-3 pt-5 flex flex-row items-center justify-between">
               <CardTitle className="text-xs font-bold text-text-secondary tracking-wider uppercase flex items-center gap-2 leading-none">
                 <TrendingUp className="size-4 text-brand-primary" />
@@ -151,7 +151,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Category Allocation */}
-          <Card className="border border-neutral-border bg-white shadow-2xs">
+          <Card className="border border-neutral-border bg-card shadow-2xs">
             <CardHeader className="pb-3 pt-5 flex flex-row items-center justify-between">
               <CardTitle className="text-xs font-bold text-text-secondary tracking-wider uppercase flex items-center gap-2 leading-none">
                 <PieChart className="size-4 text-brand-primary" />

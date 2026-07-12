@@ -21,7 +21,7 @@ interface CustomTooltipProps {
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length >= 2) {
     return (
-      <div className="bg-white border border-neutral-border p-3 rounded-lg shadow-sm text-[11px] font-semibold text-text-primary space-y-1">
+      <div className="bg-card border border-neutral-border p-3 rounded-lg shadow-sm text-[11px] font-semibold text-text-primary space-y-1">
         <p className="font-bold border-b border-neutral-border pb-1 mb-1">{label}</p>
         <p className="text-emerald-600">Income: ₹{payload[0].value.toLocaleString()}</p>
         <p className="text-status-error">Expense: ₹{payload[1].value.toLocaleString()}</p>

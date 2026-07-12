@@ -25,9 +25,9 @@ export function PasswordInput({ className, error, ...props }: PasswordInputProps
       <Button
         type="button"
         variant="ghost"
-        size="icon-xs"
+        size="icon-sm"
         onClick={toggleVisibility}
-        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary h-6 w-6 rounded-md"
+        className="absolute right-1 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary z-10 cursor-pointer"
         aria-label={showPassword ? "Hide password" : "Show password"}
       >
         {showPassword ? (

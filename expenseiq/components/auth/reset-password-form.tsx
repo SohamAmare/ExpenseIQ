@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { resetPasswordSchema } from "@/lib/auth/validation";
-import { resetPasswordAction } from "@/lib/auth/actions";
+import { clearSessionAction } from "@/lib/auth/actions";
+import { supabase } from "@/lib/auth/client";
 import { ResetPasswordInput } from "@/types/auth";
 import { PasswordInput } from "./password-input";
 import { LoadingButton } from "./loading-button";
@@ -35,16 +36,28 @@ export function ResetPasswordForm() {
     setLoading(true);
     setSuccessReset(false);
     try {
-      const result = await resetPasswordAction(data);
-      if (result.success) {
-        setSuccessReset(true);
-        toast.success("Password updated successfully! Redirecting to login...");
-        setTimeout(() => {
-          router.push(AUTH_ROUTES.LOGIN);
-        }, 2000);
-      } else {
-        toast.error(result.error || "Failed to update password");
+      // 1. Update user password directly using the client-side Supabase client instance
+      // which automatically carries the recovery session from the URL hash.
+      const { error } = await supabase.auth.updateUser({
+        password: data.password,
+      });
+
+      if (error) {
+        toast.error(error.message || "Failed to update password");
+        return;
       }
+
+      // 2. Sign out on the client to destroy the active recovery session.
+      await supabase.auth.signOut();
+
+      // 3. Clear session cookies on the server.
+      await clearSessionAction();
+
+      setSuccessReset(true);
+      toast.success("Password updated successfully! Redirecting to login...");
+      setTimeout(() => {
+        router.push(AUTH_ROUTES.LOGIN);
+      }, 2000);
     } catch {
       toast.error("An unexpected error occurred. Please try again.");
     } finally {

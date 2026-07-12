@@ -12,7 +12,7 @@ export function DashboardHeader() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-35 flex h-16 w-full items-center justify-between border-b border-neutral-border bg-white/80 px-6 backdrop-blur-md transition-all duration-200">
+    <header className="sticky top-0 z-35 flex h-16 w-full items-center justify-between border-b border-neutral-border bg-header-bg/80 px-6 backdrop-blur-md transition-all duration-200">
       {/* Left-side navigation indicators */}
       <div className="flex items-center gap-4">
         <Breadcrumb />

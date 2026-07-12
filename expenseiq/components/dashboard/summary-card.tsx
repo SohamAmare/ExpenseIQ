@@ -15,7 +15,7 @@ export function SummaryCard({ title, value, description, trend, icon: Icon }: Su
   const isNegative = trend !== undefined && trend < 0;
 
   return (
-    <Card className="border border-neutral-border bg-white shadow-2xs hover:shadow-xs transition-all duration-200 overflow-hidden group">
+    <Card className="border border-neutral-border bg-card shadow-2xs hover:shadow-xs transition-all duration-200 overflow-hidden group">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-text-secondary tracking-wider uppercase leading-none">
@@ -36,7 +36,7 @@ export function SummaryCard({ title, value, description, trend, icon: Icon }: Su
               <span
                 className={`inline-flex items-center gap-0.5 text-[10px] font-bold px-1.5 py-0.5 rounded-sm ${
                   isPositive
-                    ? "text-emerald-700 bg-emerald-50 border border-emerald-100"
+                    ? "text-emerald-700 bg-emerald-50 border border-emerald-100 dark:text-emerald-400 dark:bg-emerald-950/20 dark:border-emerald-900/30"
                     : isNegative
                     ? "text-status-error bg-status-error/5 border border-status-error/10"
                     : "text-text-secondary bg-neutral-secondary-bg border border-neutral-border"

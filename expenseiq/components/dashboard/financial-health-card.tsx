@@ -12,35 +12,35 @@ export function FinancialHealthCard({ data }: FinancialHealthCardProps) {
     switch (status) {
       case "excellent":
         return {
-          text: "text-emerald-700",
-          border: "border-emerald-200",
-          bg: "bg-emerald-50/50",
-          ring: "stroke-emerald-600",
-          track: "stroke-emerald-100",
+          text: "text-emerald-700 dark:text-emerald-400",
+          border: "border-emerald-200 dark:border-emerald-900/30",
+          bg: "bg-emerald-50/50 dark:bg-emerald-950/20",
+          ring: "stroke-emerald-600 dark:stroke-emerald-500",
+          track: "stroke-emerald-100 dark:stroke-emerald-900/20",
         };
       case "good":
         return {
-          text: "text-brand-primary",
-          border: "border-brand-primary/20",
-          bg: "bg-brand-primary/5",
-          ring: "stroke-brand-primary",
-          track: "stroke-brand-primary/10",
+          text: "text-brand-primary dark:text-emerald-400",
+          border: "border-brand-primary/20 dark:border-emerald-900/30",
+          bg: "bg-brand-primary/5 dark:bg-emerald-950/20",
+          ring: "stroke-brand-primary dark:stroke-emerald-500",
+          track: "stroke-brand-primary/10 dark:stroke-emerald-900/20",
         };
       case "fair":
         return {
-          text: "text-status-warning",
-          border: "border-status-warning/20",
-          bg: "bg-status-warning/5",
-          ring: "stroke-status-warning",
-          track: "stroke-status-warning/10",
+          text: "text-status-warning dark:text-amber-400",
+          border: "border-status-warning/20 dark:border-amber-900/30",
+          bg: "bg-status-warning/5 dark:bg-amber-950/20",
+          ring: "stroke-status-warning dark:stroke-amber-500",
+          track: "stroke-status-warning/10 dark:stroke-amber-900/20",
         };
       default:
         return {
-          text: "text-status-error",
-          border: "border-status-error/20",
-          bg: "bg-status-error/5",
-          ring: "stroke-status-error",
-          track: "stroke-status-error/10",
+          text: "text-status-error dark:text-rose-400",
+          border: "border-status-error/20 dark:border-rose-900/30",
+          bg: "bg-status-error/5 dark:bg-rose-950/20",
+          ring: "stroke-status-error dark:stroke-rose-500",
+          track: "stroke-status-error/10 dark:stroke-rose-900/20",
         };
     }
   };
@@ -53,7 +53,7 @@ export function FinancialHealthCard({ data }: FinancialHealthCardProps) {
   const strokeDashoffset = circumference - (data.score / 100) * circumference;
 
   return (
-    <Card className="border border-neutral-border bg-white shadow-2xs h-full flex flex-col justify-between">
+    <Card className="border border-neutral-border bg-card shadow-2xs h-full flex flex-col justify-between">
       <CardHeader className="pb-3 pt-5">
         <CardTitle className="text-xs font-bold text-text-secondary tracking-wider uppercase flex items-center justify-between">
           <span>Financial Health</span>

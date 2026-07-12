@@ -49,7 +49,7 @@ export function FloatingAI() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Dynamic Chat Window Popup */}
       {open && (
-        <div className="mb-4 w-80 md:w-96 h-[400px] bg-white border border-neutral-border rounded-2xl shadow-xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-250">
+        <div className="mb-4 w-80 md:w-96 h-[400px] bg-card border border-neutral-border rounded-2xl shadow-xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-250">
           {/* Header */}
           <div className="bg-brand-primary text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -86,7 +86,7 @@ export function FloatingAI() {
                     className={`max-w-[75%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed ${
                       isUser
                         ? "bg-brand-primary text-white rounded-tr-xs"
-                        : "bg-white border border-neutral-border text-text-primary rounded-tl-xs"
+                        : "bg-card border border-neutral-border text-text-primary rounded-tl-xs"
                     }`}
                   >
                     {m.content}
@@ -101,7 +101,7 @@ export function FloatingAI() {
                 <div className="size-7 rounded-lg bg-brand-primary/10 border border-brand-primary/15 text-brand-primary flex items-center justify-center shrink-0">
                   <Bot className="size-3.5 animate-pulse" />
                 </div>
-                <div className="bg-white border border-neutral-border text-text-primary rounded-2xl rounded-tl-xs px-3.5 py-2.5 text-xs flex gap-1 items-center">
+                <div className="bg-card border border-neutral-border text-text-primary rounded-2xl rounded-tl-xs px-3.5 py-2.5 text-xs flex gap-1 items-center">
                   <span className="size-1.5 rounded-full bg-text-muted animate-bounce" style={{ animationDelay: "0ms" }} />
                   <span className="size-1.5 rounded-full bg-text-muted animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="size-1.5 rounded-full bg-text-muted animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -112,14 +112,14 @@ export function FloatingAI() {
           </div>
 
           {/* Input form */}
-          <form onSubmit={handleSend} className="p-3 border-t border-neutral-border bg-white flex gap-2">
+          <form onSubmit={handleSend} className="p-3 border-t border-neutral-border bg-card flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Advisor... e.g. How to save?"
               disabled={isTyping}
-              className="flex-1 border border-neutral-border rounded-xl px-3 text-xs h-9 bg-neutral-secondary-bg/50 focus:bg-white outline-none focus:ring-1 focus:ring-brand-primary/20 transition-all"
+              className="flex-1 border border-neutral-border rounded-xl px-3 text-xs h-9 bg-neutral-secondary-bg/50 focus:bg-card outline-none focus:ring-1 focus:ring-brand-primary/20 transition-all"
             />
             <button
               type="submit"
